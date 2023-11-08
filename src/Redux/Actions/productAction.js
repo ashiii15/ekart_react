@@ -1,4 +1,4 @@
-import { SET_PRODUCTS } from "../Constants/productType"
+import { ADD_CART, SET_PRODUCTS } from "../Constants/productType"
 
 export const setProducts = (products)=>{
     return {
@@ -6,4 +6,10 @@ export const setProducts = (products)=>{
         payload:products
     }
 
+}
+export const addCart = (product)=>{
+    return {
+        type:ADD_CART,
+        payload:product
+    }
 }
