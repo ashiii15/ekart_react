@@ -1,10 +1,14 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addCart, setProducts } from "../Redux/Actions/productAction";
+import { addCart, addWishList, selectedProduct, setProducts } from "../Redux/Actions/productAction";
 import { Col, Row } from "react-bootstrap";
+import {  Link,} from "react-router-dom";
+import ProductDetails from "./ProductDetails";
+
 
 function Home() {
+  
   const products = useSelector((state) => state.allProducts.products);
   console.log(products);
   const dispatch = useDispatch();
@@ -17,12 +21,14 @@ function Home() {
   useEffect(() => {
     fetchProducts();
   }, []);
+  
   return (
     <Row className="mt-5 ms-3 mb-2" style={{ marginTop: "50px" }}>
       {products.map((product) => {
         const { id, description, image, title, price } = product;
         return (
           <Col sm={9} md={6} lg={4} xl={3}>
+            <Link to={`/product/${id}`}  style={{textDecoration:"none"}}>
             <div className="card mb-3" key={id} style={{ width: "18rem" }}>
               <img
                 classNameName="card-img-top"
@@ -38,13 +44,13 @@ function Home() {
                 </p>
                 <h5 classNameName="card-price"> $ {price}</h5>
                 <button onClick={()=>dispatch(addCart(product))}
-                  type="btn"
+              
                   classNameName="btn btn-primary mt-1"
                   style={{ marginLeft: "1rem" }}
                 >
                   Cart
                 </button>
-                <button
+                <button onClick={()=>dispatch(addWishList(product))}
                   classNameName="btn btn-primary mb-2"
                   style={{ marginLeft: "9rem" }}
                 >
@@ -52,6 +58,7 @@ function Home() {
                 </button>
               </div>
             </div>
+            </Link>
           </Col>
         );
       })}

@@ -1,4 +1,4 @@
-import { ADD_CART } from "../Constants/productType";
+import { ADD_CART, DELETE_CART } from "../Constants/productType";
 const initialState = {
     cart :[]
 }
@@ -9,6 +9,9 @@ export const cartReducer =(state=initialState,action)=>{
             return {...state,
             cart:state.cart.concat(action.payload)
             }
+            case DELETE_CART:
+                return {...state,
+                cart :state.cart.filter((product)=>product.id !== action.payload)}
                 
         default:
             return state

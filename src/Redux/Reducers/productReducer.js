@@ -1,4 +1,4 @@
-import { SET_PRODUCTS } from "../Constants/productType";
+import {  SET_PRODUCTS } from "../Constants/productType";
 
 const initialState = {
     products:[]
@@ -8,7 +8,6 @@ export const  productReducer =(state=initialState,action)=>{
         case SET_PRODUCTS:
             return {...state,
                 products:action.payload
-
             }
                 
         default:
